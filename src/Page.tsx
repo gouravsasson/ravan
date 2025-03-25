@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   Bot,
@@ -70,6 +70,9 @@ import { ServiceTabs } from "./components/ServiceTabs";
 import { Circle } from "./Circel";
 
 function Page() {
+  const widgetRef = useRef(null);
+  const widgetRef2 = useRef(null);
+
   const [phoneNumber, setPhoneNumber] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -302,11 +305,13 @@ function Page() {
                 delay={index * 0.2}
               />
             ))}
+            {/* <div className="w-screen h-screen overflow-hidden scrollbar-hidden"> */}
             <Circle />
+            {/* </div> */}
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-20">
+          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-20">
             {stats.map((stat, index) => (
               <AnimatedCounter
                 key={index}
@@ -315,7 +320,7 @@ function Page() {
                 title={stat.title}
               />
             ))}
-          </div>
+          </div> */}
 
           {/* Service Tabs */}
           <ServiceTabs />
@@ -346,56 +351,27 @@ function Page() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Voice AI Demo */}
-            <div className="bg-black/5 p-8 rounded-3xl">
-              <h3 className="text-3xl font-bold mb-4">Voice AI Demo</h3>
-              <p className="text-black/70 mb-6">
-                Meet Realtime Voice AI, the ultimate conversation catalyst. This
-                tool chats naturally, delivering instant, human-like dialogue
-                that builds trust and drives engagement.
-              </p>
-              <div className="flex gap-4">
-                <button className="flex items-center gap-2 bg-black/10 px-6 py-3 rounded-xl hover:bg-black/20 transition-colors">
-                  <Eye className="w-5 h-5" />
-                  Vision AI
-                </button>
-                <button className="flex items-center gap-2 bg-black text-[#FDB813] px-6 py-3 rounded-xl hover:bg-black/80 transition-colors">
-                  <Crown className="w-5 h-5" />
-                  Realtime Voice AI
-                </button>
+            <div className="flex flex-col justify-between bg-black/5 p-8 rounded-3xl ">
+              <div>
+                <h3 className="text-3xl font-bold mb-4">Voice AI Demo</h3>
+                <p className="text-black/70 mb-6">
+                  Meet Realtime Voice AI, the ultimate conversation catalyst.
+                  This tool chats naturally, delivering instant, human-like
+                  dialogue that builds trust and drives engagement.
+                </p>
+                <div className="flex gap-4">
+                  <button className="flex items-center gap-2 bg-black/10 px-6 py-3 rounded-xl hover:bg-black/20 transition-colors">
+                    <Eye className="w-5 h-5" />
+                    Vision AI
+                  </button>
+                  <button className="flex items-center gap-2 bg-black text-[#FDB813] px-6 py-3 rounded-xl hover:bg-black/80 transition-colors">
+                    <Crown className="w-5 h-5" />
+                    Realtime Voice AI
+                  </button>
+                </div>
               </div>
               <div className="mt-8 bg-black/10 p-6 rounded-2xl">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 bg-[#FDB813] rounded-full flex items-center justify-center">
-                    <Robot className="w-6 h-6 text-black" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">AI Assistant</h4>
-                    <p className="text-sm text-black/60">Online</p>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex gap-2">
-                    <button className="p-2 hover:bg-black/5 rounded-lg transition-colors">
-                      <Video className="w-5 h-5" />
-                    </button>
-                    <button className="p-2 hover:bg-black/5 rounded-lg transition-colors">
-                      <MonitorSmartphone className="w-5 h-5" />
-                    </button>
-                    <button className="p-2 hover:bg-black/5 rounded-lg transition-colors">
-                      <X className="w-5 h-5" />
-                    </button>
-                  </div>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Type your message..."
-                      className="w-full bg-white/50 rounded-lg pl-4 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-black/20"
-                    />
-                    <button className="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-black/5 rounded-lg transition-colors">
-                      <Send className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
+                <div ref={widgetRef2}></div>
               </div>
             </div>
 
@@ -417,25 +393,8 @@ function Page() {
                   King Of AIs
                 </button>
               </div>
-              <div className="mt-8 bg-black/10 p-6 rounded-2xl">
-                <div className="flex flex-col items-center justify-center gap-4 py-8">
-                  <div className="w-16 h-16 bg-[#FDB813] rounded-full flex items-center justify-center">
-                    <Upload className="w-8 h-8 text-black" />
-                  </div>
-                  <p className="text-center text-black/70">
-                    Drag and drop your image here or click to upload
-                  </p>
-                  <div className="flex gap-4">
-                    <button className="flex items-center gap-2 bg-black/10 px-4 py-2 rounded-lg hover:bg-black/20 transition-colors">
-                      <ImageIcon className="w-5 h-5" />
-                      Upload Image
-                    </button>
-                    <button className="flex items-center gap-2 bg-black/10 px-4 py-2 rounded-lg hover:bg-black/20 transition-colors">
-                      <Scan className="w-5 h-5" />
-                      Use Camera
-                    </button>
-                  </div>
-                </div>
+              <div className="mt-8  bg-black/10 p-10 rounded-2xl h-[470px]">
+                <div ref={widgetRef}></div>
               </div>
             </div>
           </div>
